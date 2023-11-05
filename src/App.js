@@ -9,6 +9,7 @@ let stage = 0;
 function App() {
 
   //Application Constants
+  let response = []
   const definitions = [
       "Gross monthly income refers to how much money an individual earns before deductions.", 
       "Credit Card payments refers to your average monthly credit card balance statement",
@@ -20,8 +21,8 @@ function App() {
       "Monthly Mortage Payment refers to the monthly payments you will pay for the house",
       "Credit Score refers to a numerical rating representing the perceived ability of a person or organization to fulfill their financial commitments",
     ];
-  const titleVals = ['Housing Eligibility Assistant', 'Data Input', 'Approved', 'Denied'];
-  const buttonNameVals = ['Next', 'Submit', 'Return'];
+  const titleVals = ['Housing Eligibility Assistant', 'Data Input', 'Approved', 'Not Advised'];
+  const buttonNameVals = ['Next', 'Submit', 'Return', 'Return'];
   const contentVals = [
       (<div id="stage1">
           <p>
@@ -71,10 +72,11 @@ function App() {
           </form>
       </div>),
       (<div id="stage3a">
-
+          <h1>Congratulations, you are eligible to purchase a house</h1>
       </div>),
       (<div id="stage3d">
-
+          <h2>Unfortunately, it is not recommended to purchase a house in your current conditions. However, here are some recommended next steps</h2>
+          <p>{response}</p>
       </div>)];
 
   //Title of the page
@@ -89,6 +91,12 @@ function App() {
 
         stage++;
 
+        if(stage > 2) {
+
+          stage = 0;
+
+        }
+
         if(stage === 2) {
 
             let el = document.getElementById('data');
@@ -96,7 +104,7 @@ function App() {
 
             for(let i = 0; i < 9; i++) {
 
-                data[i] = el.children[i].children[1].value;
+                data[i] = el.children[i].children[1].children[0].value;
 
             }
 
@@ -105,15 +113,61 @@ function App() {
                 return Number(val);
             });
 
-            let test;
+            let [gmi, ccp, cp, slp, av, dp, la, mmp, cs] = data;
+
+            const LTV = la/av;
+
+            if(LTV>0.80)
+            {
+              const PMI = 1+(0.01/12)
+              mmp = av*PMI;
+            }
+
+            const DTI = (ccp+cp+slp)/gmi;
+            const FEDTI = mmp/gmi;
+
+            let creditTest = (cs>=640)
+            let LTV_Test = (LTV<0.95);
+            let DTI_Test = (DTI<=0.36);
+            let FEDTI_Test = (FEDTI<=0.28);
+
+            let eligible = false;
+
+            if(creditTest&&LTV_Test&&DTI_Test&&FEDTI_Test)
+            {
+              eligible = true;
+            }
+            else
+            {
+              if(!creditTest)
+              {
+               response.push("Work on increasing your credit score"); 
+              }
+              if(!LTV_Test)
+              {
+                response.push("Lower the loan cost");
+              }
+              if(!DTI_Test)
+              {
+                response.push("Lower your debt-to-income ratio");
+              }
+              if(!FEDTI_Test)
+              {
+                response.push("Lower your mortgage-to-income ratio");
+              }
+            }
+
+            if(eligible) { stage = 2; }
+            else { stage = 3; }         
+
+        } 
+
+        for(let i = 0; i < response.length; i++) {
+
+            response[i] += ', ';
 
         }
- 
-        if(stage > 2) {
-
-          stage = 0;
-
-        }
+        
 
         setTitle(titleVals[stage]);
         setButtonName(buttonNameVals[stage]);
