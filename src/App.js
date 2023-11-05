@@ -33,40 +33,40 @@ function App() {
               
               <div>
                 <label for="grossIncome" placeholder="$00.00"><abbr title={definitions[0]}>Gross Monthly Income</abbr></label>
-                <input type="text" id="grossIncome"/>
+                <span>$ <input type="text" id="grossIncome"/></span>
               </div>
               
             <div>              
                   <label for="ccPayment" placeholder="$00.00"><abbr title={definitions[1]}>Credit Card Payment</abbr></label>
-                  <input type="text" id="ccPayment"/>
+                  <span>$ <input type="text" id="ccPayment"/></span>
               </div>
               <div>
                   <label for="carPayment" placeholder="$00.00"><abbr title={definitions[2]}>Car Payment</abbr></label>
-                  <input type="text" id="carPayment"/>
+                  <span>$ <input type="text" id="carPayment"/></span>
               </div>
               <div>
                   <label for="slPaymnet" placeholder="$00.00"><abbr title={definitions[3]}>Student Loan Payment</abbr></label>
-                  <input type="text" id="slPayment"/>
+                  <span>$ <input type="text" id="slPayment"/></span>
               </div>
               <div>
                   <label for="appValue" placeholder="$00.00"><abbr title={definitions[4]}>Appraised Value</abbr></label>
-                  <input type="text" id="appValue"/>
+                  <span>$ <input type="text" id="appValue"/></span>
               </div>
               <div>
                   <label for="dPayment" placeholder="$00.00"><abbr title={definitions[5]}>Down Payment</abbr></label>
-                  <input type="text" id="dPayment"/>
+                  <span>$ <input type="text" id="dPayment"/></span>
               </div>
               <div>
                   <label for="loanAmount" placeholder="$00.00"><abbr title={definitions[6]}>Loan Amount</abbr></label>
-                  <input type="text" id="loanAmount"/>
+                  <span>$ <input type="text" id="loanAmount"/></span>
               </div>
               <div>
                   <label for="mmPayment" placeholder="$00.00"><abbr title={definitions[7]}>Monthly Mortgage Payment</abbr></label>
-                  <input type="text" id="mmPayment"/>
+                  <span>$ <input type="text" id="mmPayment"/></span>
               </div>
               <div>
                   <label for="creditScore" placeholder="$00.00"><abbr title={definitions[8]}>Credit Score</abbr></label>
-                  <input type="text" id="creditScore"/>
+                  <span><input type="text" id="creditScore"/></span>
               </div>
           </form>
       </div>),

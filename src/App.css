@@ -90,13 +90,19 @@ abbr {
 
 }
 
+#stage2 form div input::before {
+
+  content: "$";
+
+}
+
 #stage2 form div label {
 
   font-weight: 800;
 
 }
 
-.button button{
+.button button {
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
